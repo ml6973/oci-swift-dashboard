@@ -1,0 +1,38 @@
+LAST_NAME_TOO_SHORT Your last name is too short
+EMAIL_INVALID Your email is invalid
+FIRST_NAME_EMPTY Your first name can not be empty or only contain white space
+FIRST_NAME_HAS_INVALID_CHARS Your first name contains invalid characters
+FIRST_NAME_TOO_SHORT Your first name is too short
+LAST_NAME_HAS_INVALID_CHARS Your last name contains invalid characters
+LAST_NAME_EMPTY Your last name can not be empty or only contain white space
+USER_NAME_EMPTY Your user name can not be empty or only contain white space
+USER_NAME_HAS_INVALID_CHARS Your user name can only contain letters, numbers, dashes and underscores
+GENDER_INVALID Your selected gender is invalid
+ROLE_INVALID Your selected role is invalid
+URL_INVALID Your URL is invalid
+BIRTHDATE_INVALID Your birthday is invalid
+PHONE_NUMBER_INVALID Your phone number is invalid
+PHONE_NUMBER_EMPTY Your phone number can not be empty or only contain white space
+COLOR_INVALID Your selected color is invalid
+SHOWINFO_INVALID Your selected information privacy setting is invalid
+PASSWORD_EMPTY Your password cannot be left blank
+PASSWORD_MISMATCH The entered passwords do not match
+USER_NAME_DOES_NOT_EXIST This user name does not exist
+USER_NAME_ALREADY_EXISTS This user name already exists
+DISPLAY_NAME_ALREADY_EXISTS This display name has already been taken
+PASSWORD_INCORRECT The entered password was incorrect
+CLASS_NAME_EMPTY The class name cannot be left blank
+CLASS_NAME_HAS_INVALID_CHARS The entered class name has contained invalid characters
+PROFESSOR_ID_EMPTY The entered professor id cannot be left blank
+PROFESSOR_ID_HAS_INVALID_CHARS The entered professor id can only contain numbers
+PROFESSOR_ID_DOES_NOT_EXIST The professor's user id that was entered does not exist
+PROFESSOR_ID_NOT_PROFESSOR The user id entered is not a professor
+STUDYSHEET_ID_EMPTY The study sheet id must not be empty
+STUDYSHEET_ID_HAS_INVALID_CHARS The study sheet id can only contain real numbers greater than 0
+CLASS_ID_HAS_INVALID_CHARS The class id can only contain real numbers greater than 0
+CLASS_ID_EMPTY The class if cannot be left empty
+DESCRIPTION_TOO_LONG The description has a maximum limit of 255 characters.
+STUDYSHEET_TOO_LONG The study sheet has a maximum limit of 10000 characters.
+RESPONSE_TOO_LONG The response has a maximum limit of 255 characters.
+USER_ID_INVALID The entered user ID is invalid
+USER_ID_EMPTY The user ID cannot be left blank

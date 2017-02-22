@@ -1,0 +1,18 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 0;
+}
+
+.jumbotron {
+    margin-bottom: 0px;
+    /*background-image: url(/oci-swift-dashboard/resources/siteImages/low-poly-texture-2-creditby-Zacharie-Loire.png);*/
+    background-color: white;
+    background-position: 0% 50%;
+    background-size: auto;
+    background-repeat: no-repeat;
+    color: black;
+ 
+    text-shadow: white 0.1em 0.1em 0.5em;
+
+}

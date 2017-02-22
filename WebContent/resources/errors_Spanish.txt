@@ -1,0 +1,27 @@
+LAST_NAME_TOO_SHORT Su apellido es demasiado corto
+EMAIL_INVALID Tu correo electrónico es inválido
+FIRST_NAME_EMPTY Su nombre no puede estar vacío o sólo contienen espacios en blanco
+FIRST_NAME_HAS_INVALID_CHARS Su nombre contiene caracteres no válidos
+FIRST_NAME_TOO_SHORT Su nombre de pila es demasiado corto
+LAST_NAME_HAS_INVALID_CHARS Su apellido contiene caracteres no válidos
+LAST_NAME_EMPTY Su apellido no puede estar vacío o sólo contienen espacios en blanco
+USER_NAME_EMPTY Tu nombre de usuario no puede estar vacío o sólo contienen espacios en blanco
+USER_NAME_HAS_INVALID_CHARS Tu nombre de usuario sólo puede contener letras, números, guiones y guiones bajos
+GENDER_INVALID Su género seleccionado no es válido
+ROLE_INVALID Su rol seleccionado no es válido
+URL_INVALID Su URL es válida
+BIRTHDATE_INVALID Su cumpleaños es válido
+PHONE_NUMBER_INVALID Su número de teléfono no es válido
+PHONE_NUMBER_EMPTY Su número de teléfono no puede estar vacío o sólo contienen espacios en blanco
+COLOR_INVALID Su color seleccionado no es válido
+SHOWINFO_INVALID Su entorno privacidad de la información seleccionada no es válida
+PASSWORD_EMPTY Tu contraseña no puede dejarse en blanco
+USER_NAME_DOES_NOT_EXIST Este nombre de usuario no existe
+USER_NAME_ALREADY_EXISTS Este nombre de usuario ya existe
+PASSWORD_INCORRECT La contraseña introducida no es correcta
+CLASS_NAME_EMPTY El nombre de la clase no puede dejarse en blanco
+CLASS_NAME_HAS_INVALID_CHARS El nombre de la clase entrado ha contenido caracteres no válidos
+PROFESSOR_ID_EMPTY La Identificación del profesor ingresado no puede dejarse en blanco
+PROFESSOR_ID_HAS_INVALID_CHARS La Identificación del profesor entrado sólo puede contener números
+PROFESSOR_ID_DOES_NOT_EXIST ID de usuario del profesor que se ha introducido no existe
+PROFESSOR_ID_NOT_PROFESSOR El ID de usuario que introdujo no es un profesor
