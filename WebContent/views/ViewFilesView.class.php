@@ -25,51 +25,62 @@ class ViewFilesView {
   	//Retrieve all assigned tenants
   	$tenants = TenantDB::getTenantsBy('userId', $_SESSION['authenticatedUser']->getUserId());
   	
-  	//Get all containers
-  	if (array_key_exists(0, $tenants))
-  		$containers = OCI_SWIFT::getContainers($tenants[0]);
-  	else
-  		$containers = array(false);
+  	if (!is_null($tenants) && !empty($tenants)){
+  		foreach ($tenants as $tenant){
   	
-  	//If authentication as a tenant failed, initialize containers to false
-  	if (is_null($containers))
-  		$containers = array(false);
-  	
- 	foreach($containers as $container){
-  			echo '<div class="container">';
-  			echo '
-  				<div class="row">
-					<h2 class="text-left pull-left" style="padding-left: 20px;">'.$container['name'].'</h2>
-  				</div>';
-	  		
-	  		if ($container != false)
-	  			$objects = OCI_SWIFT::getObjects($tenants[0], $container['name']);
-	  		else
-	  			$objects = null;
-			
-	  		if (!is_null($objects) && ($container['count'] > 0)) {
-				foreach($objects as $object) {
-					if (!preg_match('/\/$/', $object['name'])) {
-						echo '
-			           <h3><ul>
-				        	<div>';
-						echo ' '.$object["name"].'';
-					    echo '</div>
-			          </ul></h3>';
-					}
-				}
-	  		}else{
-	  			echo '
-		           <h3><ul>
-			        	<div>';
-	  			echo ' '."No Files Present".'';
-	  			echo '</div>
-		          </ul></h3>';
-	  		}
-			echo '
-	    	<br><br>';
-			echo '</div>';
-	  }
+		  	//Get all containers
+		  	$containers = OCI_SWIFT::getContainers($tenant);
+		  	
+		  	//If authentication as a tenant failed, initialize containers to false
+		  	if (is_null($containers))
+		  		continue;
+		  	
+		 	foreach($containers as $container){
+		  			echo '<div class="container">';
+		  			echo '
+		  				<div class="row">
+							<h2 class="text-left pull-left" style="padding-left: 20px;">'.$container['name'].'</h2>
+		  				</div>';
+			  		
+			  		if ($container != false)
+			  			$objects = OCI_SWIFT::getObjects($tenant, $container['name']);
+			  		else
+			  			$objects = null;
+					
+			  		if (!is_null($objects) && ($container['count'] > 0)) {
+						foreach($objects as $object) {
+							if (!preg_match('/\/$/', $object['name'])) {
+								echo '
+					           <h3><ul>
+						        	<div>';
+								echo ' '.$object["name"].'';
+							    echo '</div>
+					          </ul></h3>';
+							}
+						}
+			  		}else{
+			  			echo '
+				           <h3><ul>
+					        	<div>';
+			  			echo ' '."No Files Present".'';
+			  			echo '</div>
+				          </ul></h3>';
+			  		}
+					echo '
+			    	<br><br>';
+					echo '</div>';
+		 	}
+	 	}
+  	}else{
+  		echo '<div class="container">';
+  		echo '
+				           <h3><ul>
+					        	<div>';
+  		echo ' '."No Files Present".'';
+  		echo '</div>
+				          </ul></h3>';
+  		echo '</div>';
+  	}
   }
 }
 ?>
