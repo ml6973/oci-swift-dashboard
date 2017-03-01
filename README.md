@@ -1,4 +1,4 @@
-# OCI Swift Dashboard
+# Secure Multi-Tenant Cloud Storage Dashboard
 
 Requires Xampp (PHP version 5.6.xx)
 

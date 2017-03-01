@@ -19,7 +19,7 @@ class ViewFilesView {
 	<!--Banner-->
 	<div class="jumbotron">
 	   	<div id="greeting" class="container">
-	       	<h1 id="welcome">Welcome to the OCI Swift Dashboard!</h1>
+	       	<h1 id="welcome">Welcome to the Secure Multi-Tenant Cloud Storage Dashboard!</h1>
 	       	<p>This will provide an easy to use dashboard to view your files.</p>
 	       <!--	<p><a class="btn btn-primary btn-md" href="/#/about" role="button">Learn more &raquo;</a></p> -->
 	    </div>

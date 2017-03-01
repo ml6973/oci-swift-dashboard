@@ -27,7 +27,7 @@ class registrationView {
 		                <div class="container">
 		                    <div class="row">
 		               <!--         <div class="col-sm-8 col-sm-offset-2 text">
-		                            <h1><strong>OCI Swift Dashboard</strong> Registration Panel</h1>
+		                            <h1><strong>Secure Multi-Tenant Cloud Storage Dashboard</strong> Registration Panel</h1>
 		                            <div class="description">
 		                            	<p>Start accessing your files with ease!</p>
 		                            </div>
@@ -37,7 +37,7 @@ class registrationView {
 		                        <div class="col-sm-6 col-sm-offset-3 form-box">
 		                        	<div class="form-top">
 		                        		<div class="form-top-left">
-		                        			<h1><strong>OCI Swift Dashboard</strong> Registration Panel</h1>
+		                        			<h1><strong>Secure Multi-Tenant Cloud Storage Dashboard</strong> Registration Panel</h1>
 		                            		<p>Start accessing your files with ease!</p>
 		                        		</div>
 		                  <!--      		<div class="form-top-right">

@@ -27,7 +27,7 @@ class LoginView {
 	<!--	<div class="jumbotron"> -->
 		<div class="row">
 <!--		<div class="col-sm-8 col-sm-offset-2 text">
-		<h1><strong>OCI Swift Dashboard</strong> Login Panel</h1>
+		<h1><strong>Secure Multi-Tenant Cloud Storage Dashboard</strong><br> Login Panel</h1>
 		<div class="description">
 		<!-- <p>We offer more valuable courses to registered users.<br>If you have any question, feel free to <a href="/#/about"><strong>contact us</strong></a>!</p> -->
 		</div> -->
@@ -38,7 +38,7 @@ class LoginView {
 		<div class="col-sm-6 col-sm-offset-3 form-box">
 		<div class="form-top">
 		<div class="form-top-left">
-		<h1><strong>OCI Swift Dashboard</strong> Login Panel</h1>
+		<h1><strong>Secure Multi-Tenant Cloud Storage Dashboard</strong><br> Login Panel</h1>
 		<p>View your files at a glance.</p>
 		</div>
 	<!--	<div class="form-top-right">

@@ -26,7 +26,7 @@ class registrationCompleteView {
 		                <div class="container">
 		                    <div class="row">
 		               <!--         <div class="col-sm-8 col-sm-offset-2 text">
-		                            <h1><strong>OCI Swift Dashboard</strong> Registration Panel</h1>
+		                            <h1><strong>Secure Multi-Tenant Cloud Storage Dashboard</strong> Registration Panel</h1>
 		                            <div class="description">
 		                            	<p>Start accessing your files with ease!</p>
 		                            </div>
@@ -37,7 +37,7 @@ class registrationCompleteView {
 		                        	<div class="form-top">
 										<i class="fa fa-check"></i>
 		                        		<div class="form-top-left">
-		                        			<h1><strong>OCI Swift Dashboard</strong> Registration Accepted!</h1>
+		                        			<h1><strong>Secure Multi-Tenant Cloud Storage Dashboard</strong> Registration Accepted!</h1>
 		                            		<p>We will notify you via email when your account is ready.</p>
 		                        		</div>
 		                  	     		<!--<div class="form-top-right">

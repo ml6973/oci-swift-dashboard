@@ -5,7 +5,7 @@ class MasterView {
 		<!DOCTYPE html>
 		<html>
 		<head>
-			<title>OCI Swift Dashboard</title>
+			<title>Secure Multi-Tenant Cloud Storage Dashboard</title>
 			<!--Vendor CSS-->
 			<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 				<!--bootstrap-->
@@ -84,11 +84,11 @@ class MasterView {
     	</button>';
     	if (!is_null($authenticatedUser)){
     		echo '<img class="logo" src="/'.$base."/resources/siteImages/logo.png".'" alt="Logo" height="50" width="75">';
-    		echo '<a id="webname" class="navbar-brand pull-right" href="/'.$base.'/viewfiles"> OCI Swift Dashboard</a>';
+    		echo '<a id="webname" class="navbar-brand pull-right" href="/'.$base.'/viewfiles"> Secure Multi-Tenant Cloud Storage Dashboard</a>';
     	}
     	else {
     		echo '<img class="logo" src="/'.$base."/resources/siteImages/logo.png".'" alt="Logo" height="50" width="75">';
-    		echo '<a id="webname" class="navbar-brand pull-right" href="/'.$base.'/login"> OCI Swift Dashboard</a>';
+    		echo '<a id="webname" class="navbar-brand pull-right" href="/'.$base.'/login"> Secure Multi-Tenant Cloud Storage Dashboard</a>';
     	}
 
     	echo '</div>
@@ -125,7 +125,7 @@ class MasterView {
 		            <div class="footer-bottom-left">
 		                <br><br>
 		                <div>
-		                	<p class="footer-company-name text-muted">2016 © OCI Swift Dashboard. All rights reserved. <br>Site built by Gregory Hooks.</p>
+		                	<p class="footer-company-name text-muted">2016 © Secure Multi-Tenant Cloud Storage Dashboard. All rights reserved. <br>Site built by Gregory Hooks.</p>
 		                </div>
 		            </div>
 		        </div>
