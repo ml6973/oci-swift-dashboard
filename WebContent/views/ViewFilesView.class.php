@@ -11,6 +11,9 @@ class ViewFilesView {
   	$base = $_SESSION['base'];
   	$pathDir = dirname(__FILE__);  //Initialize the path directory
   	
+  	echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />';
+  	echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>';
+  	echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>';
   	echo '<style>#greeting{text-align:center;}</style>';
   	echo '
 	<!--Banner-->
@@ -27,22 +30,21 @@ class ViewFilesView {
   	
   	if (!is_null($tenants) && !empty($tenants)){
   		foreach ($tenants as $tenant){
-  	
 		  	//Get all containers
 		  	$containers = OCI_SWIFT::getContainers($tenant);
 		  	
 		  	//If authentication as a tenant failed, initialize containers to false
-		  	if (is_null($containers))
+		  	if (is_null($containers) || empty($containers))
 		  		continue;
 		  	
+	  		echo '<div class="container">';
+	  		echo '
+	  				<div class="row">
+						<h2 class="text-left pull-left" style="padding-left: 20px;">'.$tenant.'</h2>
+	  				</div>';
+	  		$objectPaths = array();
 		 	foreach($containers as $container){
-		  			echo '<div class="container">';
-		  			echo '
-		  				<div class="row">
-							<h2 class="text-left pull-left" style="padding-left: 20px;">'.$container['name'].'</h2>
-		  				</div>';
-			  		
-			  		if ($container != false)
+		  			if ($container != false)
 			  			$objects = OCI_SWIFT::getObjects($tenant, $container['name']);
 			  		else
 			  			$objects = null;
@@ -50,26 +52,17 @@ class ViewFilesView {
 			  		if (!is_null($objects) && ($container['count'] > 0)) {
 						foreach($objects as $object) {
 							if (!preg_match('/\/$/', $object['name'])) {
-								echo '
-					           <h3><ul>
-						        	<div>';
-								echo ' '.$object["name"].'';
-							    echo '</div>
-					          </ul></h3>';
+								array_push($objectPaths, $container['name'].'/'.$object['name']);
 							}
 						}
-			  		}else{
-			  			echo '
-				           <h3><ul>
-					        	<div>';
-			  			echo ' '."No Files Present".'';
-			  			echo '</div>
-				          </ul></h3>';
 			  		}
-					echo '
-			    	<br><br>';
-					echo '</div>';
-		 	}
+		 		}
+		 	echo '<div id='.$tenant.'>';
+		 	$tree = build_tree($objectPaths);
+		 	buildUL($tree, '');
+		 	echo '</div>';
+		 	echo '</div>';
+		 	echo '<script>$(\'#'.$tenant.'\').jstree();</script>';
 	 	}
   	}else{
   		echo '<div class="container">';
@@ -82,5 +75,43 @@ class ViewFilesView {
   		echo '</div>';
   	}
   }
+}
+
+function build_tree($paths){
+	$array = array();
+	foreach ($paths as $path) {
+	  $path = trim($path, '/');
+	  $list = explode('/', $path);
+	  $n = count($list);
+	
+	  $arrayRef = &$array; // start from the root
+	  for ($i = 0; $i < $n; $i++) {
+	    $key = $list[$i];
+	    $arrayRef = &$arrayRef[$key]; // index into the next level
+	  }
+	}
+	return $array;
+}
+
+function buildUL($array, $prefix) {
+	echo "\n<ul>\n";
+	foreach ($array as $key => $value) {
+		//File type icons
+		if (preg_match('/\.png$/', $key))
+			echo "<li data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
+		elseif (preg_match('/\.jpg$/', $key))
+			echo "<li data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
+		//default icon for files not listed above
+		elseif (!is_array($value))
+			echo "<li data-jstree='{\"icon\":\"glyphicon glyphicon-file\"}'>";
+		else
+			echo "<li>";
+		echo "$key";
+		// if the value is another array, recursively build the list
+		if (is_array($value))
+			buildUL($value, "$prefix$key/");
+			echo "</li>\n";
+	}
+	echo "</ul>\n";
 }
 ?>
