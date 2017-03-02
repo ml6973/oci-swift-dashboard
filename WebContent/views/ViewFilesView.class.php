@@ -66,8 +66,7 @@ class ViewFilesView {
 		 	echo '<script>$("#'.$tenant.'").on("select_node.jstree",
      					function(evt, data){
 		 			        if(data.instance.is_leaf(data.node)){
-          					   var newWindow = window.open();
-		 			           newWindow.location.replace(\'http://\' + window.location.hostname + \'/'.$base.'/fileserve?'.base64_encode($tenant).'&\' + data.node.id + \'\');
+		 			           window.location.assign(\'http://\' + window.location.hostname + \'/'.$base.'/fileserve?'.base64_encode($tenant).'&\' + data.node.id + \'\');
 		 			        }
      					}
 			);</script>';
