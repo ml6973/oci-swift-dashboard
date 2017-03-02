@@ -106,12 +106,12 @@ function buildUL($array, $prefix) {
 	foreach ($array as $key => $value) {
 		//File type icons
 		if (preg_match('/\.png$/', $key))
-			echo "<li id=".base64_encode($prefix.$key)." data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
+			echo "<li id=".base64_encode($prefix.rawurlencode($key))." data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
 		elseif (preg_match('/\.jpg$/', $key))
-			echo "<li id=".base64_encode($prefix.$key)." data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
+			echo "<li id=".base64_encode($prefix.rawurlencode($key))." data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
 		//default icon for files not listed above
 		elseif (!is_array($value))
-			echo "<li id=".base64_encode($prefix.$key)." data-jstree='{\"icon\":\"glyphicon glyphicon-file\"}'>";
+			echo "<li id=".base64_encode($prefix.rawurlencode($key))." data-jstree='{\"icon\":\"glyphicon glyphicon-file\"}'>";
 		else
 			echo "<li>";
 		echo "$key";
