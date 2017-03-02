@@ -63,6 +63,14 @@ class ViewFilesView {
 		 	echo '</div>';
 		 	echo '</div>';
 		 	echo '<script>$(\'#'.$tenant.'\').jstree();</script>';
+		 	echo '<script>$("#'.$tenant.'").on("select_node.jstree",
+     					function(evt, data){
+		 			        if(data.instance.is_leaf(data.node)){
+          					   var newWindow = window.open();
+		 			           newWindow.location.replace(\'http://\' + window.location.hostname + \'/'.$base.'/fileserve?'.base64_encode($tenant).'&\' + data.node.id + \'\');
+		 			        }
+     					}
+			);</script>';
 	 	}
   	}else{
   		echo '<div class="container">';
@@ -98,12 +106,12 @@ function buildUL($array, $prefix) {
 	foreach ($array as $key => $value) {
 		//File type icons
 		if (preg_match('/\.png$/', $key))
-			echo "<li data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
+			echo "<li id=".base64_encode($prefix.$key)." data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
 		elseif (preg_match('/\.jpg$/', $key))
-			echo "<li data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
+			echo "<li id=".base64_encode($prefix.$key)." data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
 		//default icon for files not listed above
 		elseif (!is_array($value))
-			echo "<li data-jstree='{\"icon\":\"glyphicon glyphicon-file\"}'>";
+			echo "<li id=".base64_encode($prefix.$key)." data-jstree='{\"icon\":\"glyphicon glyphicon-file\"}'>";
 		else
 			echo "<li>";
 		echo "$key";
