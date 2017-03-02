@@ -135,6 +135,7 @@ class OCI_SWIFT {
 		$objectPath = self::$swiftURL.'/'.$objectPath;
 		$fileSize = OCI_SWIFT::get_size($objectPath);
 		$fileName = end(explode('/', $objectPath));
+		$fileName = rawurldecode($fileName);
 		if (is_null($fileSize))
 			return null;
 		
@@ -148,7 +149,7 @@ class OCI_SWIFT {
 		
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');
-		header('Content-Disposition: attachment; filename='.$fileName);
+		header('Content-Disposition: attachment; filename="'.$fileName.'"');
 		header('Content-Transfer-Encoding: binary');
 		header('Expires: 0');
 		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
