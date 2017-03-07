@@ -22,6 +22,12 @@ Database::clearDB();
 $db = Database::getDB('ptest_swift_dashboard');
 $value = TenantDB::getTenantsBy('userId', 4);
 print_r($value);
+echo "<br><br><br>";
+$value2 = TenantDB::getTenantListBy('tenantId', $value);
+print_r($value2);
+echo "<br><br><br>";
+$value2 = TenantDB::getTenantListBy('tenantId', $value, 0);
+print_r($value2);
 ?>
 
 </body>

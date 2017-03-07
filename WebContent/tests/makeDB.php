@@ -47,6 +47,15 @@ function makeDB($dbName) {
 				);
 		$st->execute ();
 		
+		$st = $db->prepare ("CREATE TABLE TenantList (
+							  tenantId           int(11) NOT NULL AUTO_INCREMENT UNIQUE,
+							  tenant             varchar (255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+							  description        varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+							  PRIMARY KEY (tenantId)
+							)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
+				);
+		$st->execute ();
+		
 		$st = $db->prepare ("CREATE TABLE Tenants (
 							  userId             int(11) NOT NULL COLLATE utf8_unicode_ci,
 							  tenantId			 varchar(255) NOT NULL COLLATE utf8_unicode_ci,
@@ -79,11 +88,17 @@ function makeDB($dbName) {
 	    $st->execute(array(':userId' => 2));
 	    $st->execute(array(':userId' => 3));
 	    
+	    $sql = "INSERT INTO TenantList (tenantId, tenant, description) VALUES
+		                          (:tenantId, :tenant, :description)";
+	    $st = $db->prepare($sql);
+	    $st->execute(array(':tenantId' => 1, ':tenant' => '12', ':description' => 'test description 1'));
+	    $st->execute(array(':tenantId' => 2, ':tenant' => '123', ':description' => 'test description 2'));
+	    
 	    $sql = "INSERT INTO Tenants (userId, tenantId) VALUES
 		                          (:userId, :tenantId)";
 	    $st = $db->prepare($sql);
-	    $st->execute(array(':userId' => 4, ':tenantId' => '12'));
-	    $st->execute(array(':userId' => 4, ':tenantId' => '123'));
+	    $st->execute(array(':userId' => 4, ':tenantId' => '1'));
+	    $st->execute(array(':userId' => 4, ':tenantId' => '2'));
 	    
 	    $sql = "INSERT INTO Registration (userId, complete) VALUES
 		                          (:userId, :complete)";

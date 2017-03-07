@@ -22,9 +22,17 @@ CREATE TABLE Registration (
   FOREIGN KEY (userId) REFERENCES Users(userId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE TenantList (
+  tenantId           int(11) NOT NULL AUTO_INCREMENT UNIQUE,
+  tenant             varchar (255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+  description        varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+  PRIMARY KEY (tenantId)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE Tenants (
   userId             int(11) NOT NULL COLLATE utf8_unicode_ci,
-  tenantId			 varchar(255) NOT NULL COLLATE utf8_unicode_ci,
+  tenantId			 int(11) NOT NULL COLLATE utf8_unicode_ci,
   PRIMARY KEY (userId, tenantID),
-  FOREIGN KEY (userId) REFERENCES Users(userId)
+  FOREIGN KEY (userId) REFERENCES Users(userId),
+  FOREIGN KEY (tenantId) REFERENCES TenantList(tenantId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

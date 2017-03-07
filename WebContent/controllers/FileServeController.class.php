@@ -16,7 +16,8 @@ class FileServeController {
 					$tenant = $parsed[0];
 					$objectPath = $parsed[1];
 				}
-				$tenants = TenantDB::getTenantsBy('userId', $_SESSION['authenticatedUser']->getUserId());
+				$tenantIDs = TenantDB::getTenantsBy('userId', $_SESSION['authenticatedUser']->getUserId());
+				$tenants = TenantDB::getTenantListBy('tenantId', $tenantIDs, 1);
 				if (in_array(base64_decode($tenant), $tenants)) {
 					FileServe::run($tenant, $objectPath);
 				}else {

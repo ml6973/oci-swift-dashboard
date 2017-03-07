@@ -17,7 +17,7 @@ include_once("./makeDB.php");
 
 <h2>It should create a database for a particular name</h2>
 <?php
-$myDb = makeDB('ptest_swift');
+$myDb = makeDB('ptest_swift_dashboard');
 ?>
 
 </body>

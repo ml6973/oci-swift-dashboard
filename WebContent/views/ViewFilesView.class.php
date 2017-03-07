@@ -26,12 +26,19 @@ class ViewFilesView {
 	</div>';
   	
   	//Retrieve all assigned tenants
-  	$tenants = TenantDB::getTenantsBy('userId', $_SESSION['authenticatedUser']->getUserId());
+  	$tenantIDs = TenantDB::getTenantsBy('userId', $_SESSION['authenticatedUser']->getUserId());
+  	$tenants = TenantDB::getTenantListBy('tenantId', $tenantIDs, 0);
+  	
+  	//Sort tenants naturally
+  	foreach ($tenants as $key => $row) {
+  		$title[$key] = $row['tenantId'];
+  	}
+  	array_multisort($title , SORT_NATURAL, $tenants);
   	
   	if (!is_null($tenants) && !empty($tenants)){
   		foreach ($tenants as $tenant){
 		  	//Get all containers
-		  	$containers = OCI_SWIFT::getContainers($tenant);
+		  	$containers = OCI_SWIFT::getContainers($tenant['tenantId']);
 		  	
 		  	//If authentication as a tenant failed, initialize containers to false
 		  	if (is_null($containers) || empty($containers))
@@ -40,12 +47,15 @@ class ViewFilesView {
 	  		echo '<div class="container">';
 	  		echo '
 	  				<div class="row">
-						<h2 class="text-left pull-left" style="padding-left: 20px;">'.$tenant.'</h2>
+						<h2 class="text-left pull-left" style="padding-left: 20px;">'.$tenant['tenantId'].'</h2>
 	  				</div>';
+	  		if (!is_null($tenant['description'])) {
+	  			echo '<p style="padding-left:2em; font-size:17px;">'.$tenant['description'].'</p>';
+	  		}
 	  		$objectPaths = array();
 		 	foreach($containers as $container){
 		  			if ($container != false)
-			  			$objects = OCI_SWIFT::getObjects($tenant, $container['name']);
+			  			$objects = OCI_SWIFT::getObjects($tenant['tenantId'], $container['name']);
 			  		else
 			  			$objects = null;
 					
@@ -57,16 +67,16 @@ class ViewFilesView {
 						}
 			  		}
 		 		}
-		 	echo '<div id='.$tenant.'>';
+		 	echo '<div id='.$tenant['tenantId'].'>';
 		 	$tree = build_tree($objectPaths);
 		 	buildUL($tree, '');
 		 	echo '</div>';
 		 	echo '</div>';
-		 	echo '<script>$(\'#'.$tenant.'\').jstree();</script>';
-		 	echo '<script>$("#'.$tenant.'").on("select_node.jstree",
+		 	echo '<script>$(\'#'.$tenant['tenantId'].'\').jstree();</script>';
+		 	echo '<script>$("#'.$tenant['tenantId'].'").on("select_node.jstree",
      					function(evt, data){
 		 			        if(data.instance.is_leaf(data.node)){
-		 			           window.location.assign(\'http://\' + window.location.hostname + \'/'.$base.'/fileserve?'.base64_encode($tenant).'&\' + data.node.id + \'\');
+		 			           window.location.assign(\'http://\' + window.location.hostname + \'/'.$base.'/fileserve?'.base64_encode($tenant['tenantId']).'&\' + data.node.id + \'\');
 		 			        }
      					}
 			);</script>';
