@@ -135,9 +135,18 @@ class OCI_SWIFT {
 		if (is_null(self::$swiftToken))
 			return null;
 	
+		$objectPathParts = explode('/', $objectPath);
+		$objectPath = "";
+		foreach ($objectPathParts as $part){
+			if ($part === end($objectPathParts)){
+			   $objectPath = $objectPath.$part;
+			}else{
+			   $objectPath = $objectPath.rawurlencode($part)."/";
+			}
+		}
 		$objectPath = self::$swiftURL.'/'.$objectPath;
 		$fileSize = OCI_SWIFT::get_size($objectPath);
-		$fileName = end(explode('/', $objectPath));
+		$fileName = end($objectPathParts);
 		$fileName = rawurldecode($fileName);
 		if (is_null($fileSize))
 			return null;
@@ -172,7 +181,7 @@ class OCI_SWIFT {
 	
 	protected static function get_size($url) {
 		$my_ch = curl_init();
-		curl_setopt($my_ch, CURLOPT_URL,$url);
+		curl_setopt($my_ch, CURLOPT_URL, $url);
 		curl_setopt($my_ch, CURLOPT_HEADER, true);
 		curl_setopt($my_ch, CURLOPT_NOBODY, true);
 		curl_setopt($my_ch, CURLOPT_RETURNTRANSFER, true);
