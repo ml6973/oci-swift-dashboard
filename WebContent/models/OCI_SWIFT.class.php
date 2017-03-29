@@ -99,11 +99,14 @@ class OCI_SWIFT {
 		//Return null if authentication had a failure
 		if (is_null(self::$swiftToken))
 			return null;
+		
+		//Encode the container name as a URL
+		$containerNameEncode = rawurlencode($containerName);
 	
 		//Initialize the curl operation and set the parameters
 		$ch = curl_init();
 	
-		curl_setopt($ch, CURLOPT_URL, self::$swiftURL."/".$containerName."?format=json");
+		curl_setopt($ch, CURLOPT_URL, self::$swiftURL."/".$containerNameEncode."?format=json");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
