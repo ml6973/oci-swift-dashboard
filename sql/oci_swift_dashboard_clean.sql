@@ -25,6 +25,7 @@ CREATE TABLE Registration (
 CREATE TABLE TenantList (
   tenantId           int(11) NOT NULL AUTO_INCREMENT UNIQUE,
   tenant             varchar (255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+  name               varchar (255) NOT NULL COLLATE utf8_unicode_ci,
   description        varchar (255) NOT NULL COLLATE utf8_unicode_ci,
   PRIMARY KEY (tenantId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

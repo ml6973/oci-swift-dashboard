@@ -48,7 +48,7 @@ class TenantDB {
 		$tenantRowsets = NULL;
 		try {
 			$db = Database::getDB ();
-			$query = "SELECT tenant, description FROM TenantList";
+			$query = "SELECT tenant, name, description FROM TenantList";
 			if (!is_null($type)) {
 				if (!in_array($type, $allowedTypes))
 					throw new PDOException("$type not an allowed search criterion for Tenant");
@@ -74,7 +74,7 @@ class TenantDB {
 				if ($idOnly)
 					array_push ($tenants, $tenantRow['tenant'] );
 				else
-					array_push ($tenants, array("tenantId" => $tenantRow['tenant'], "description" => $tenantRow['description']));
+					array_push ($tenants, array("tenantId" => $tenantRow['tenant'], "name" => $tenantRow['name'], "description" => $tenantRow['description']));
 			}
 		}
 		return $tenants;

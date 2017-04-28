@@ -28,12 +28,14 @@ class ViewFilesView {
   	//Retrieve all assigned tenants
   	$tenantIDs = TenantDB::getTenantsBy('userId', $_SESSION['authenticatedUser']->getUserId());
   	$tenants = TenantDB::getTenantListBy('tenantId', $tenantIDs, 0);
+  	$title = null;
   	
   	//Sort tenants naturally
   	foreach ($tenants as $key => $row) {
   		$title[$key] = $row['tenantId'];
   	}
-  	array_multisort($title , SORT_NATURAL, $tenants);
+  	if (!is_null($title))
+  	   array_multisort($title , SORT_NATURAL, $tenants);
   	
   	if (!is_null($tenants) && !empty($tenants)){
   		foreach ($tenants as $tenant){
@@ -47,7 +49,7 @@ class ViewFilesView {
 	  		echo '<div class="container">';
 	  		echo '
 	  				<div class="row">
-						<h2 class="text-left pull-left" style="padding-left: 20px;">'.$tenant['tenantId'].'</h2>
+						<h2 class="text-left pull-left" style="padding-left: 20px;">'.$tenant['name'].'</h2>
 	  				</div>';
 	  		if (!is_null($tenant['description'])) {
 	  			echo '<p style="padding-left:2em; font-size:17px;">'.$tenant['description'].'</p>';
