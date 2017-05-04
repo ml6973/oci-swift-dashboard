@@ -32,7 +32,7 @@ class ViewFilesView {
   	
   	//Sort tenants naturally
   	foreach ($tenants as $key => $row) {
-  		$title[$key] = $row['tenantId'];
+  		$title[$key] = $row['name'];
   	}
   	if (!is_null($title))
   	   array_multisort($title , SORT_NATURAL, $tenants);
@@ -71,10 +71,12 @@ class ViewFilesView {
 		 		}
 		 	echo '<div id='.$tenant['tenantId'].'>';
 		 	$tree = build_tree($objectPaths);
-		 	buildUL($tree, '');
+		 	$treeJSON = array();
+		 	buildTreeJSON($tree, '', $treeJSON);
+		 	$treeJSON = json_encode($treeJSON);
 		 	echo '</div>';
 		 	echo '</div>';
-		 	echo '<script>$(\'#'.$tenant['tenantId'].'\').jstree();</script>';
+		 	echo '<script>$(\'#'.$tenant['tenantId'].'\').jstree({core: {data: '.$treeJSON.'}} );</script>';
 		 	echo '<script>$("#'.$tenant['tenantId'].'").on("select_node.jstree",
      					function(evt, data){
 		 			        if(data.instance.is_leaf(data.node)){
@@ -112,25 +114,28 @@ function build_tree($paths){
 	return $array;
 }
 
-function buildUL($array, $prefix) {
-	echo "\n<ul>\n";
+function buildTreeJSON($array, $prefix, & $output) {
 	foreach ($array as $key => $value) {
 		//File type icons
-		if (preg_match('/\.png$/', $key))
-			echo "<li id=".base64_encode($prefix.rawurlencode($key))." data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
-		elseif (preg_match('/\.jpg$/', $key))
-			echo "<li id=".base64_encode($prefix.rawurlencode($key))." data-jstree='{\"icon\":\"glyphicon glyphicon-picture\"}'>";
+		if (preg_match('/\.png$/', $key)){
+			$jsonPiece = array("id" => base64_encode($prefix.rawurlencode($key)),"text" => $key, "icon" => "glyphicon glyphicon-picture");
+			array_push($output, $jsonPiece);
+		} elseif (preg_match('/\.jpg$/', $key)) {
+			$jsonPiece = array("id" => base64_encode($prefix.rawurlencode($key)),"text" => $key, "icon" => "glyphicon glyphicon-picture");
+			array_push($output, $jsonPiece);
+
 		//default icon for files not listed above
-		elseif (!is_array($value))
-			echo "<li id=".base64_encode($prefix.rawurlencode($key))." data-jstree='{\"icon\":\"glyphicon glyphicon-file\"}'>";
-		else
-			echo "<li>";
-		echo "$key";
+		} elseif (!is_array($value)) {
+			$jsonPiece = array("id" => base64_encode($prefix.rawurlencode($key)),"text" => $key, "icon" => "glyphicon glyphicon-file");
+			array_push($output, $jsonPiece);
+		}
+
 		// if the value is another array, recursively build the list
-		if (is_array($value))
-			buildUL($value, "$prefix$key/");
-			echo "</li>\n";
+		if (is_array($value)){
+			$jsonPiece = array("text" => $key, "children" => array());
+			buildTreeJSON($value, "$prefix$key/", $jsonPiece["children"]);
+			array_push($output, $jsonPiece);
+		}
 	}
-	echo "</ul>\n";
 }
 ?>
