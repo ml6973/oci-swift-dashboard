@@ -1,0 +1,19 @@
+body{
+}
+
+.ViewPanel {
+}
+
+.affix-bottom {
+	position: absolute;
+	width: 100%;
+	right: 15px;
+	padding-left: 30px;
+}
+
+.affix {
+	top: 55px;
+	right: 15px;
+	width: inherit;
+	padding-left: 30px;
+}

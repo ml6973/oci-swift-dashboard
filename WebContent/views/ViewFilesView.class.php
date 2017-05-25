@@ -12,6 +12,7 @@ class ViewFilesView {
   	$pathDir = dirname(__FILE__);  //Initialize the path directory
   	
   	echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />';
+  	echo '<link rel="stylesheet" href="css/viewFiles_style.css">';
   	echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>';
   	echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>';
   	echo '<style>#greeting{text-align:center;}</style>';
@@ -38,6 +39,9 @@ class ViewFilesView {
   	   array_multisort($title , SORT_NATURAL, $tenants);
   	
   	if (!is_null($tenants) && !empty($tenants)){
+  		echo '<div class="container" style="width:100%;">';
+  		echo '<div class="row">';
+  		echo '<div class="col-sm-7">';
   		foreach ($tenants as $tenant){
 		  	//Get all containers
 		  	$containers = OCI_SWIFT::getContainers($tenant['tenantId']);
@@ -46,7 +50,7 @@ class ViewFilesView {
 		  	if (is_null($containers) || empty($containers))
 		  		continue;
 		  	
-	  		echo '<div class="container">';
+	  		echo '<div class="tenantcontainer">';
 	  		echo '
 	  				<div class="row">
 						<h2 class="text-left pull-left" style="padding-left: 20px;">'.$tenant['name'].'</h2>
@@ -76,7 +80,7 @@ class ViewFilesView {
 		 	$treeJSON = json_encode($treeJSON);
 		 	echo '</div>';
 		 	echo '</div>';
-		 	echo '<script>$(\'#'.$tenant['tenantId'].'\').jstree({core: {data: '.$treeJSON.'}} );</script>';
+		 	echo '<script>$(\'#'.$tenant['tenantId'].'\').jstree({core: {data: '.$treeJSON.'}, plugins: [\'dnd\']} );</script>';
 		 	echo '<script>$("#'.$tenant['tenantId'].'").on("select_node.jstree",
      					function(evt, data){
 		 			        if(data.instance.is_leaf(data.node)){
@@ -85,6 +89,15 @@ class ViewFilesView {
      					}
 			);</script>';
 	 	}
+	 	echo '</div>';
+	 	
+	 	echo '<div class="col-sm-5">';
+
+	 	ViewPanel::show();
+	 	
+	 	echo '</div>';
+	 	echo '</div>';
+	 	echo '</div>';
   	}else{
   		echo '<div class="container">';
   		echo '
