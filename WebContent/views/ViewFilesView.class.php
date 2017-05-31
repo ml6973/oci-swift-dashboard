@@ -41,7 +41,7 @@ class ViewFilesView {
   	if (!is_null($tenants) && !empty($tenants)){
   		echo '<div class="container" style="width:100%;">';
   		echo '<div class="row">';
-  		echo '<div class="col-sm-7">';
+  		echo '<div class="col-sm-5">';
   		foreach ($tenants as $tenant){
 		  	//Get all containers
 		  	$containers = OCI_SWIFT::getContainers($tenant['tenantId']);
@@ -91,7 +91,7 @@ class ViewFilesView {
 	 	}
 	 	echo '</div>';
 	 	
-	 	echo '<div class="col-sm-5">';
+	 	echo '<div class="col-sm-7">';
 
 	 	ViewPanel::show();
 	 	
