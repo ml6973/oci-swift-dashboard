@@ -37,6 +37,13 @@ class ViewPanel {
 		
 		echo '</div>';
 		
+		echo '<script src="js/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>';
+		/*echo '<script type="text/javascript" charset="utf-8">
+				  $(document).ready(function(){
+				    $("a[rel^=\'prettyPhoto\']").prettyPhoto();
+				  });
+			  </script>';*/
+		
 		echo '<script src=\'js/jwplayer/jwplayer.js\'></script>';
 		echo '<script src=\'js/helpers/helpers.js\'></script>';
 		echo '<script>jwplayer.key=\'/WD5x7pXTcwyNA2ZWkPLeKEJ9VPM4/Rwk/ZDmw==\';</script>';

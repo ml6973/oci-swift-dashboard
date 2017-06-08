@@ -12,7 +12,7 @@ function getFileUrl(node, data){
 function makeVideoPlayer(fileUrl, position) {
 	//REPLACE with video player
 	var playerName = "player" + position;
-    $('.Viewer' + position).replaceWith('<div id="' + playerName + '">Loading the player...</div>');
+    $('.Viewer' + position).html('<div id="' + playerName + '">Loading the player...</div>');
 
     //Setup the player
     var tempPlayer = jwplayer(playerName).setup({
@@ -26,11 +26,26 @@ function makeVideoPlayer(fileUrl, position) {
     eval("const " + playerName + " = tempPlayer")
 }
 
+function makeImageViewer(fileUrl, position) {
+	var imageName = "image" + position;
+	$('.Viewer' + position).html('<div class="embed-responsive-item" style="background-color: white; text-align: center;"><a href="' + fileUrl + '" rel="gallery[mygallery]" title="" style="height: 100%; width: 100%;"><img src="' + fileUrl + '" style="height: inherit;" alt="" /></a></div>');
+}
+
+function updateImageGallery () {
+	$("a[rel^='gallery']").prettyPhoto({
+		theme: 'light_rounded',
+		overlay_gallery: false,
+		social_tools: false
+	});
+}
+
 function replaceContent(filetype, fileUrl, position) {
 	if (/(mp4)$/ig.test(filetype)) {
         makeVideoPlayer(fileUrl, position);
-	}else if (/(jpg|png)$/ig.test(filetype)) {
-	    alert("Nice image, but I can't display that quite yet");
+        updateImageGallery();
+	}else if (/(gif|jpg|png)$/ig.test(filetype)) {
+		makeImageViewer(fileUrl, position);
+		updateImageGallery();
 	}else{
 		alert("Unsupported file type.  You must download this file and view it locally.");
 	}

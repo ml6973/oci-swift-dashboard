@@ -13,6 +13,7 @@ class ViewFilesView {
   	
   	echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />';
   	echo '<link rel="stylesheet" href="css/viewFiles_style.css">';
+  	echo '<link rel="stylesheet" href="css/prettyPhoto/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />';
   	echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>';
   	echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>';
   	echo '<style>#greeting{text-align:center;}</style>';
