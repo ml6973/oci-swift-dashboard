@@ -65,6 +65,19 @@ function makeDB($dbName) {
 				);
 		$st->execute ();
 		
+		$st = $db->prepare ("CREATE TABLE APIs (
+							  apiId              int(11) NOT NULL AUTO_INCREMENT UNIQUE,
+							  apiName            varchar (255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+							  apiType            varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+							  apiUrl             varchar (255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+							  apiUser            varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+							  apiPass            varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+							  description        varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+							  PRIMARY KEY (apiId)
+							)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
+				);
+		$st->execute ();
+		
 		$sql = "INSERT INTO Users (userId, userName, passwordHash) VALUES
 		                          (:userId, :userName, :passwordHash)";
 		$st = $db->prepare($sql);
@@ -104,6 +117,12 @@ function makeDB($dbName) {
 		                          (:userId, :complete)";
 	    $st = $db->prepare($sql);
 	    $st->execute(array(':userId' => 4, ':complete' => true));
+	    
+	    $sql = "INSERT INTO APIs (apiId, apiName, apiType, apiUrl, apiUser, apiPass, description) VALUES
+		                          (:apiId, :apiName, :apiType, :apiUrl, :apiUser, :apiPass, :description)";
+	    $st = $db->prepare($sql);
+	    $st->execute(array(':apiId' => 1, ':apiName' => 'Image API 1', ':apiType' => 'image', ':apiUrl' => 'http://testapi.com:12345/image', ':apiUser' => 'testuser1', ':apiPass' => 'testpass1', ':description' => 'Image API for testing'));
+	    $st->execute(array(':apiId' => 2, ':apiName' => 'Audio API 1', ':apiType' => 'audio', ':apiUrl' => 'http://testapi.com:12345/audio', ':apiUser' => 'testuser2', ':apiPass' => 'testpass2', ':description' => 'Audio API for testing'));
 	    
 	} catch ( PDOException $e ) {
 		echo $e->getMessage ();  // not final error handling

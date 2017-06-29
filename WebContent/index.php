@@ -13,6 +13,9 @@
 	if (!isset($_SESSION['authenticated']))
 		$_SESSION['authenticated'] = false;
 	switch ($control) {
+		case "apiserve":
+			APIServeController::run();
+			break;
 		case "fileserve":
 			FileServeController::run();
 			break;

@@ -28,7 +28,7 @@ function makeVideoPlayer(fileUrl, position) {
 
 function makeImageViewer(fileUrl, position) {
 	var imageName = "image" + position;
-	$('.Viewer' + position).html('<div class="embed-responsive-item" style="background-color: white; text-align: center;"><a href="' + fileUrl + '" rel="gallery[mygallery]" title="" style="height: 100%; width: 100%;"><img src="' + fileUrl + '" style="height: inherit;" alt="" /></a></div>');
+	$('.Viewer' + position).html('<div class="embed-responsive-item" style="background-color: white; text-align: center;"><a href="' + fileUrl + '" rel="gallery[mygallery]" title="" style="height: 100%; width: 100%;"><img id="photoviewer' + position + '" src="' + fileUrl + '" style="height: inherit;" alt="" /></a></div>');
 }
 
 function updateImageGallery () {
@@ -40,11 +40,18 @@ function updateImageGallery () {
 }
 
 function replaceContent(filetype, fileUrl, position) {
+	var apiId = -1;
+	if (position == 1) {
+		apiId = $('#select1').find(":selected").val();
+	}else if (position == 2){
+		apiId = $('#select2').find(":selected").val();
+	}
 	if (/(mp4)$/ig.test(filetype)) {
         makeVideoPlayer(fileUrl, position);
         updateImageGallery();
 	}else if (/(gif|jpg|png)$/ig.test(filetype)) {
 		makeImageViewer(fileUrl, position);
+		callImageAPI(apiId, fileUrl, position+2);
 		updateImageGallery();
 	}else{
 		alert("Unsupported file type.  You must download this file and view it locally.");

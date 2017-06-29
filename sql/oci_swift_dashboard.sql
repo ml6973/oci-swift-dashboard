@@ -38,6 +38,17 @@ CREATE TABLE Tenants (
   FOREIGN KEY (tenantId) REFERENCES TenantList(tenantId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE APIs (
+  apiId              int(11) NOT NULL AUTO_INCREMENT UNIQUE,
+  apiName            varchar (255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+  apiType            varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+  apiUrl             varchar (255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+  apiUser            varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+  apiPass            varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+  description        varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+  PRIMARY KEY (apiId)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 INSERT INTO Users (userId, userName, passwordHash) VALUES 
 	   (1, 'Greg', '$2y$10$AlvSVL7GOzho0vBnMEYqROLSrMqQrRttpS.g4qJV3tpcSk5Q5o1om');  
 INSERT INTO Users (userId, userName,  passwordHash) VALUES 
@@ -64,3 +75,8 @@ INSERT INTO Registration (userId, complete) VALUES
 	   (3, false);
 INSERT INTO Registration (userId, complete) VALUES 
 	   (4, true);
+
+INSERT INTO APIs (apiId, apiName, apiType, apiUrl, apiUser, apiPass, description) VALUES 
+	   (1, 'Image API 1', 'image', '127.0.0.1:12345/image', 'testuser', 'testpass', 'Processes Images');
+INSERT INTO APIs (apiId, apiName, apiType, apiUrl, apiUser, apiPass, description) VALUES 
+	   (2, 'Image API 2', 'image', '127.0.0.1:12345/image2', 'testuser2', 'testpass2', 'Processes Images Again');

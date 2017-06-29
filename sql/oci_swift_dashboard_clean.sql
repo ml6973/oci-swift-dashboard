@@ -37,3 +37,14 @@ CREATE TABLE Tenants (
   FOREIGN KEY (userId) REFERENCES Users(userId),
   FOREIGN KEY (tenantId) REFERENCES TenantList(tenantId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE APIs (
+  apiId              int(11) NOT NULL AUTO_INCREMENT UNIQUE,
+  apiName            varchar (255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+  apiType            varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+  apiUrl             varchar (255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+  apiUser            varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+  apiPass            varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+  description        varchar (255) NOT NULL COLLATE utf8_unicode_ci,
+  PRIMARY KEY (apiId)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
