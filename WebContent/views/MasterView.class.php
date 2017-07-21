@@ -100,10 +100,12 @@ class MasterView {
     	if (!is_null($authenticatedUser)){
     		echo '<li class="pull-right"><a href="/'.$base.'/logout" id="logout-btn" ng-click=\'/'.$base.'/logout\' ng-hide=[[buttonShow]]>Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>';
     		echo '<li class="pull-right"><a href="/'.$base.'/viewfiles" id="courses-btn" ng-click=\'/'.$base.'/viewfiles\' ng-hide=[[buttonShow]]>My Files <i class="fa" aria-hidden="true"></i></a></li>';
+    		echo '<li class="pull-right"><a href="http://cloudelab.org/" id="marketplace-btn" ng-click=\'http://cloudelab.org/\' ng-hide=[[buttonShow]]>eLab <i class="fa" aria-hidden="true"></i></a></li>';
     		echo '<li> <span class="label label-default alignName">Welcome '.
     				$authenticatedUser->getUserName().'</span></li>';
     	}
 		else {
+			echo '<li><a href="http://cloudelab.org/" id="marketplace-btn" ng-click=\'http://cloudelab.org/\' ng-hide=[[buttonShow]]>eLab <i class="fa" aria-hidden="true"></i></a></li>';
     		echo '<li><a href="/'.$base.'/login" id="logout-btn" ng-click=\'/'.$base.'/login\' ng-hide=[[buttonShow]]>Login <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>';
 			echo '<li><a href="/'.$base.'/registration" id="logout-btn" ng-click=\'/'.$base.'/registration\' ng-hide=[[buttonShow]]>Register <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>';
 		}
