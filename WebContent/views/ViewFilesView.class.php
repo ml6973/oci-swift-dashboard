@@ -44,6 +44,8 @@ class ViewFilesView {
   		echo '<div class="row">';
   		echo '<div class="col-sm-5">';
   		foreach ($tenants as $tenant){
+  			ob_flush();
+  			
 		  	//Get all containers
 		  	$containers = OCI_SWIFT::getContainers($tenant['tenantId']);
 		  	
