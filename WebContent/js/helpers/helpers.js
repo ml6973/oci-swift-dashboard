@@ -46,7 +46,7 @@ function replaceContent(filetype, fileUrl, position) {
 	}else if (position == 2){
 		apiId = $('#select2').find(":selected").val();
 	}
-	if (/(mp4)$/ig.test(filetype)) {
+	if (/(mp4|mov)$/ig.test(filetype)) {
         makeVideoPlayer(fileUrl, position);
         updateImageGallery();
 	}else if (/(gif|jpg|png)$/ig.test(filetype)) {
